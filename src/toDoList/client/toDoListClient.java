@@ -12,16 +12,25 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import toDoList.toDoList;
 import toDoList.toDoListHelper;
+import toDoList.server.toDoListImpl;
 
 public class toDoListClient {
 	private static final int REGISTER = 1;
-	private static final int ADDITEM = 2;
-	private static final int QUERY = 3;
-	public static final int EXIT = 4;
+	private static final int LOGIN = 2;
+	private static final int ADDITEM = 3;
+	private static final int QUERY = 4;
+	private static final int LISTALL = 5;
+	private static final int DELETE = 6;
+	private static final int CLEARALL = 7;
+	private static final int LOGOUT = 8;
+	
+	
+	
+	
 	static toDoList todoListImpl;
 
 	static {
-		System.out.println("客户端正在连接服务器。。。");
+		System.out.println("客户端正在连接服务器...");
 
 		// 初始化ip和端口号，-ORBInitialHost 127.0.0.1 -ORBInitialPort 1050
 		String args[] = new String[4];
@@ -61,9 +70,13 @@ public class toDoListClient {
 		while(isRun){
 			System.out.println("请选择您要进行的操作：");
 			System.out.println("1.注册");
-			System.out.println("2.添加项");
-			System.out.println("3.查询项");
-			System.out.println("3.退出");
+			System.out.println("2.登陆");
+			System.out.println("3.添加项");
+			System.out.println("4.查询项");
+			System.out.println("5.查看当前已有项");
+			System.out.println("6.删除项");
+			System.out.println("7.删除所有项");
+			System.out.println("8.退出登录");
 			int choice;
 			Scanner sc = new Scanner(System.in);
 			choice = sc.nextInt();
@@ -76,6 +89,13 @@ public class toDoListClient {
 				String passWord = sc.next();
 				System.out.println(todoListImpl.register(name, passWord));
 				break;
+			case LOGIN:
+				System.out.println("请输入您的姓名：");
+				String logInName = sc.next();
+				System.out.println("请输入你的密码：");
+				String logInPassWord = sc.next();
+				System.out.println(todoListImpl.logIn(logInName, logInPassWord));
+				break;
 			case ADDITEM:
 				System.out.println("请输入您要添加的项的开始时间：（格式：yyyy-MM-dd HH:mm:ss）");
 				//这个地方必须要加一个sc.nextLine();
@@ -84,7 +104,7 @@ public class toDoListClient {
 				//System.out.println(start);
 				System.out.println("请输入您要添加项的结束时间：（格式：yyyy-MM-dd HH:mm:ss）");
 				String end = sc.nextLine();
-				System.out.print("请输入您要添加项的标签：");
+				System.out.println("请输入您要添加项的标签：");
 				String label = sc.nextLine();
 				long startTime = sdf.parse(start).getTime();
 				long endTime = sdf.parse(end).getTime();
@@ -102,8 +122,24 @@ public class toDoListClient {
 				long endQueryTimeLong = sdf.parse(endQueryTimeString).getTime();
 				System.out.println(todoListImpl.queryItems(startQueryTimeLong, endQueryTimeLong));
 				break;
-			case EXIT:
-				isRun = false;
+			case LISTALL:
+				System.out.println(todoListImpl.listAll());
+				break;
+			case DELETE:
+				//sc.nextLine();
+				System.out.println(todoListImpl.listAll());
+				System.out.println("请输入您要删除的索引号：");
+				int index = sc.nextInt();
+				System.out.println(todoListImpl.deleteItem(index));
+				break;
+			case CLEARALL:
+				System.out.println(todoListImpl.clearItems());
+				break;
+			case LOGOUT:
+				String result = todoListImpl.logOut();
+				if(result.equals("Log out successful"))
+					isRun = false;
+				System.out.println(result);
 				break;
 			}
 		}

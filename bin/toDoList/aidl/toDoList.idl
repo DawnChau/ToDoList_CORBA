@@ -1,9 +1,12 @@
 module toDoList{
 	interface toDoList{
 		string register(in string name,in string password);
-		string addItem(in string startTime,in string endTime,in string label);
-		string queryItems(in string startTime,in string endTime);
+		string logIn(in string name,in string password);
+		string addItem(in long long startTime,in long long endTime,in string label);
+		string queryItems(in long long startTime,in long long endTime);
 		string deleteItem(in long index);
+		string listAll();
+		string logOut();
 		string clearItems();
 	};
 };

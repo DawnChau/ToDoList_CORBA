@@ -18,19 +18,32 @@ public class toDoListImpl extends toDoListPOA{
 
 	@Override
 	public String deleteItem(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return im.deleteItem(index);
 	}
 
 	@Override
 	public String clearItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return im.clearAll();
 	}
 
 	@Override
 	public String queryItems(long startTime, long endTime) {
 		return im.queryItems(startTime, endTime);
+	}
+
+	@Override
+	public String listAll() {
+		return im.listAll();
+	}
+
+	@Override
+	public String logIn(String name, String password) {
+		return im.logIn(name, password);
+	}
+
+	@Override
+	public String logOut() {
+		return im.logOut();
 	}
 	
 

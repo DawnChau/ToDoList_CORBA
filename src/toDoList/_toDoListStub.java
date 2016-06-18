@@ -5,7 +5,7 @@ package toDoList;
 * toDoList/_toDoListStub.java .
 * 由IDL-to-Java 编译器 (可移植), 版本 "3.2"生成
 * 从toDoList.idl
-* 2016年6月17日 星期五 上午09时24分08秒 CST
+* 2016年6月18日 星期六 上午11时15分39秒 CST
 */
 
 public class _toDoListStub extends org.omg.CORBA.portable.ObjectImpl implements toDoList
@@ -32,6 +32,69 @@ public class _toDoListStub extends org.omg.CORBA.portable.ObjectImpl implements 
             }
   } // register
 
+  public String logIn (String name, String password)
+  {
+            org.omg.CORBA.portable.InputStream $in = null;
+            try {
+                org.omg.CORBA.portable.OutputStream $out = _request ("logIn", true);
+                $out.write_string (name);
+                $out.write_string (password);
+                $in = _invoke ($out);
+                String $result = $in.read_string ();
+                return $result;
+            } catch (org.omg.CORBA.portable.ApplicationException $ex) {
+                $in = $ex.getInputStream ();
+                String _id = $ex.getId ();
+                throw new org.omg.CORBA.MARSHAL (_id);
+            } catch (org.omg.CORBA.portable.RemarshalException $rm) {
+                return logIn (name, password        );
+            } finally {
+                _releaseReply ($in);
+            }
+  } // logIn
+
+  public String addItem (long startTime, long endTime, String label)
+  {
+            org.omg.CORBA.portable.InputStream $in = null;
+            try {
+                org.omg.CORBA.portable.OutputStream $out = _request ("addItem", true);
+                $out.write_longlong (startTime);
+                $out.write_longlong (endTime);
+                $out.write_string (label);
+                $in = _invoke ($out);
+                String $result = $in.read_string ();
+                return $result;
+            } catch (org.omg.CORBA.portable.ApplicationException $ex) {
+                $in = $ex.getInputStream ();
+                String _id = $ex.getId ();
+                throw new org.omg.CORBA.MARSHAL (_id);
+            } catch (org.omg.CORBA.portable.RemarshalException $rm) {
+                return addItem (startTime, endTime, label        );
+            } finally {
+                _releaseReply ($in);
+            }
+  } // addItem
+
+  public String queryItems (long startTime, long endTime)
+  {
+            org.omg.CORBA.portable.InputStream $in = null;
+            try {
+                org.omg.CORBA.portable.OutputStream $out = _request ("queryItems", true);
+                $out.write_longlong (startTime);
+                $out.write_longlong (endTime);
+                $in = _invoke ($out);
+                String $result = $in.read_string ();
+                return $result;
+            } catch (org.omg.CORBA.portable.ApplicationException $ex) {
+                $in = $ex.getInputStream ();
+                String _id = $ex.getId ();
+                throw new org.omg.CORBA.MARSHAL (_id);
+            } catch (org.omg.CORBA.portable.RemarshalException $rm) {
+                return queryItems (startTime, endTime        );
+            } finally {
+                _releaseReply ($in);
+            }
+  } // queryItems
 
   public String deleteItem (int index)
   {
@@ -52,6 +115,44 @@ public class _toDoListStub extends org.omg.CORBA.portable.ObjectImpl implements 
                 _releaseReply ($in);
             }
   } // deleteItem
+
+  public String listAll ()
+  {
+            org.omg.CORBA.portable.InputStream $in = null;
+            try {
+                org.omg.CORBA.portable.OutputStream $out = _request ("listAll", true);
+                $in = _invoke ($out);
+                String $result = $in.read_string ();
+                return $result;
+            } catch (org.omg.CORBA.portable.ApplicationException $ex) {
+                $in = $ex.getInputStream ();
+                String _id = $ex.getId ();
+                throw new org.omg.CORBA.MARSHAL (_id);
+            } catch (org.omg.CORBA.portable.RemarshalException $rm) {
+                return listAll (        );
+            } finally {
+                _releaseReply ($in);
+            }
+  } // listAll
+
+  public String logOut ()
+  {
+            org.omg.CORBA.portable.InputStream $in = null;
+            try {
+                org.omg.CORBA.portable.OutputStream $out = _request ("logOut", true);
+                $in = _invoke ($out);
+                String $result = $in.read_string ();
+                return $result;
+            } catch (org.omg.CORBA.portable.ApplicationException $ex) {
+                $in = $ex.getInputStream ();
+                String _id = $ex.getId ();
+                throw new org.omg.CORBA.MARSHAL (_id);
+            } catch (org.omg.CORBA.portable.RemarshalException $rm) {
+                return logOut (        );
+            } finally {
+                _releaseReply ($in);
+            }
+  } // logOut
 
   public String clearItems ()
   {
@@ -108,47 +209,4 @@ public class _toDoListStub extends org.omg.CORBA.portable.ObjectImpl implements 
      orb.destroy() ;
    }
   }
-
-@Override
-public String addItem(long startTime, long endTime, String label) {
-	org.omg.CORBA.portable.InputStream $in = null;
-    try {
-        org.omg.CORBA.portable.OutputStream $out = _request ("addItem", true);
-        $out.write_longlong(startTime);
-        $out.write_longlong (endTime);
-        $out.write_string (label);
-        $in = _invoke ($out);
-        String $result = $in.read_string ();
-        return $result;
-    } catch (org.omg.CORBA.portable.ApplicationException $ex) {
-        $in = $ex.getInputStream ();
-        String _id = $ex.getId ();
-        throw new org.omg.CORBA.MARSHAL (_id);
-    } catch (org.omg.CORBA.portable.RemarshalException $rm) {
-        return addItem (startTime, endTime, label        );
-    } finally {
-        _releaseReply ($in);
-    }
-}
-
-@Override
-public String queryItems(long startTime, long endTime) {
-	org.omg.CORBA.portable.InputStream $in = null;
-    try {
-        org.omg.CORBA.portable.OutputStream $out = _request ("queryItems", true);
-        $out.write_longlong (startTime);
-        $out.write_longlong (endTime);
-        $in = _invoke ($out);
-        String $result = $in.read_string ();
-        return $result;
-    } catch (org.omg.CORBA.portable.ApplicationException $ex) {
-        $in = $ex.getInputStream ();
-        String _id = $ex.getId ();
-        throw new org.omg.CORBA.MARSHAL (_id);
-    } catch (org.omg.CORBA.portable.RemarshalException $rm) {
-        return queryItems (startTime, endTime        );
-    } finally {
-        _releaseReply ($in);
-    }
-}
 } // class _toDoListStub

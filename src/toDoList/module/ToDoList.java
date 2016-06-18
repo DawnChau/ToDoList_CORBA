@@ -28,4 +28,16 @@ public class ToDoList {
 		}
 		return list;
 	}
+	
+	public ArrayList<Item> listAll(){
+		return toDoList;
+	}
+	
+	public boolean clearAll(){
+		toDoList.clear();
+		if(toDoList.isEmpty())
+			return true;
+		else
+			return false;
+	}
 }

@@ -5,7 +5,7 @@ package toDoList;
 * toDoList/toDoListPOA.java .
 * 由IDL-to-Java 编译器 (可移植), 版本 "3.2"生成
 * 从toDoList.idl
-* 2016年6月17日 星期五 上午09时24分08秒 CST
+* 2016年6月18日 星期六 上午11时15分39秒 CST
 */
 
 public abstract class toDoListPOA extends org.omg.PortableServer.Servant
@@ -18,10 +18,13 @@ public abstract class toDoListPOA extends org.omg.PortableServer.Servant
   static
   {
     _methods.put ("register", new java.lang.Integer (0));
-    _methods.put ("addItem", new java.lang.Integer (1));
-    _methods.put ("queryItems", new java.lang.Integer (2));
-    _methods.put ("deleteItem", new java.lang.Integer (3));
-    _methods.put ("clearItems", new java.lang.Integer (4));
+    _methods.put ("logIn", new java.lang.Integer (1));
+    _methods.put ("addItem", new java.lang.Integer (2));
+    _methods.put ("queryItems", new java.lang.Integer (3));
+    _methods.put ("deleteItem", new java.lang.Integer (4));
+    _methods.put ("listAll", new java.lang.Integer (5));
+    _methods.put ("logOut", new java.lang.Integer (6));
+    _methods.put ("clearItems", new java.lang.Integer (7));
   }
 
   public org.omg.CORBA.portable.OutputStream _invoke (String $method,
@@ -46,10 +49,21 @@ public abstract class toDoListPOA extends org.omg.PortableServer.Servant
          break;
        }
 
-       case 1:  // toDoList/toDoList/addItem
+       case 1:  // toDoList/toDoList/logIn
        {
-         long startTime = in.read_longlong() ;
-         long endTime = in.read_longlong();
+         String name = in.read_string ();
+         String password = in.read_string ();
+         String $result = null;
+         $result = this.logIn (name, password);
+         out = $rh.createReply();
+         out.write_string ($result);
+         break;
+       }
+
+       case 2:  // toDoList/toDoList/addItem
+       {
+         long startTime = in.read_longlong ();
+         long endTime = in.read_longlong ();
          String label = in.read_string ();
          String $result = null;
          $result = this.addItem (startTime, endTime, label);
@@ -58,10 +72,10 @@ public abstract class toDoListPOA extends org.omg.PortableServer.Servant
          break;
        }
 
-       case 2:  // toDoList/toDoList/queryItems
+       case 3:  // toDoList/toDoList/queryItems
        {
-         long startTime = in.read_longlong();
-         long endTime = in.read_longlong();
+         long startTime = in.read_longlong ();
+         long endTime = in.read_longlong ();
          String $result = null;
          $result = this.queryItems (startTime, endTime);
          out = $rh.createReply();
@@ -69,7 +83,7 @@ public abstract class toDoListPOA extends org.omg.PortableServer.Servant
          break;
        }
 
-       case 3:  // toDoList/toDoList/deleteItem
+       case 4:  // toDoList/toDoList/deleteItem
        {
          int index = in.read_long ();
          String $result = null;
@@ -79,7 +93,25 @@ public abstract class toDoListPOA extends org.omg.PortableServer.Servant
          break;
        }
 
-       case 4:  // toDoList/toDoList/clearItems
+       case 5:  // toDoList/toDoList/listAll
+       {
+         String $result = null;
+         $result = this.listAll ();
+         out = $rh.createReply();
+         out.write_string ($result);
+         break;
+       }
+
+       case 6:  // toDoList/toDoList/logOut
+       {
+         String $result = null;
+         $result = this.logOut ();
+         out = $rh.createReply();
+         out.write_string ($result);
+         break;
+       }
+
+       case 7:  // toDoList/toDoList/clearItems
        {
          String $result = null;
          $result = this.clearItems ();
